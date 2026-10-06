@@ -2,23 +2,467 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hestia</title>
-  <meta name="description" content="Hestia – die Haushalts-App, die für dich mitdenkt.">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Hestia · Der Haushalt, endlich sortiert</title>
+  <meta name="description" content="Hestia teilt die Aufgaben im Haushalt auf, plant das Essen und führt die Einkaufsliste. Du sagst nur, was erledigt ist, und die KI trägt es ein.">
+  <meta name="theme-color" content="#F4F3EF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0E0F10" media="(prefers-color-scheme: dark)">
+  <meta property="og:title" content="Hestia · Der Haushalt, endlich sortiert">
+  <meta property="og:description" content="Putzplan, Essen und Einkauf in einer App. Was erledigt ist, sagst du einfach, und Hestia trägt es ein.">
+  <meta property="og:image" content="https://hestiahome.app/img/icon-512.png">
+  <meta property="og:url" content="https://hestiahome.app/">
+  <link rel="icon" href="img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="preload" href="fonts/Newsreader-SemiBold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="home.css?v=3">
 </head>
 <body>
-<main>
-  <h1>Hestia</h1>
-  <p class="stand">Die Haushalts-App, die für dich mitdenkt.</p>
-  <div class="card">
-    <p>Einkauf, Vorrat, Essensplan und Putzplan für deinen Haushalt – gemeinsam, ruhig und auf das beschränkt, was heute zu tun ist.</p>
-    <p>Hestia ist derzeit in einer geschlossenen Testphase.</p>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mark" viewBox="0 0 64 64">
+    <path d="M15 52 V29 A17 17 0 0 1 49 29 V52" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M11 52 H53" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M32 47.5 C26.8 47.5 24 44.2 24 40.3 C24 35.6 28.4 33.2 29.6 27.5 C33.4 30 35.4 33.4 34.8 36.6 C36.4 35.8 37.4 34.3 37.6 32.6 C39.6 34.8 40.4 37.4 40.4 40 C40.4 44.2 37.2 47.5 32 47.5 Z" fill="currentColor"/>
+  </symbol>
+  <symbol id="check" viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="cam" viewBox="0 0 24 24"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6H8l1.4-2h5.2L16 6h1.5A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="12.3" r="3.3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+</svg>
+
+<header class="nav" id="nav">
+  <a class="nav-brand" href="#top" aria-label="Hestia, zum Anfang">
+    <svg class="nav-mark"><use href="#mark"/></svg>
+    <span>Hestia</span>
+  </a>
+  <nav class="nav-links" aria-label="Bereiche">
+    <a href="#haushalt">Haushalt</a>
+    <a href="#essen">Essen und Einkauf</a>
+    <a href="#hestia">Frag Hestia</a>
+    <a href="#privat">Privatsphäre</a>
+  </nav>
+  <a class="pill pill-small" href="#zugang">Zugang anfragen</a>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-copy">
+    <h1 class="display">
+      <span class="line"><span>Der Haushalt,</span></span>
+      <span class="line"><span>endlich <em>sortiert.</em></span></span>
+    </h1>
+    <p class="lead load" style="--d:.35s">Hestia teilt die Aufgaben auf, plant das Essen und führt die Einkaufsliste. Du sagst nur, was erledigt ist, und Hestia trägt es ein.</p>
+    <div class="cta-row load" style="--d:.5s">
+      <a class="pill" href="#zugang">Zugang anfragen</a>
+      <a class="textlink" href="#funktionen">Alle Funktionen</a>
+    </div>
   </div>
-  <footer>
+
+  <div class="hero-stage load" style="--d:.15s">
+    <div class="phone tilt" id="heroPhone">
+      <div class="island"></div>
+      <div class="screen">
+        <div class="status"><span>9:41</span><span class="status-r"></span></div>
+        <div class="scr-pad">
+          <div class="today-head">
+            <div>
+              <div class="scr-title">Guten Abend, Mira</div>
+              <div class="scr-meta">19:30 Yoga · Morgen Biomüll</div>
+            </div>
+            <span class="avatar av-indigo">M</span>
+          </div>
+
+          <div class="scr-group">Essen heute</div>
+          <div class="card">
+            <div class="eat-row">
+              <div class="ringwrap" data-ring="indigo" data-value="0.78" data-size="44"><span class="avatar av-indigo sm">M</span></div>
+              <div class="eat-txt">
+                <div class="eat-kcal"><b class="num" data-count="1640">0</b> <span>/ 2.100 kcal</span></div>
+                <div class="protein"><span>Eiweiß 62 / 90 g</span><i><b style="--w:69%"></b></i></div>
+              </div>
+            </div>
+            <div class="supp"><span class="dot-circle"></span>Magnesium · abends</div>
+          </div>
+
+          <div class="scr-group split"><span>Haushalt heute</span><span class="streak">♥&#xFE0E; 12</span></div>
+          <div class="tiles">
+            <div class="tile" id="heroTileM">
+              <div class="ringwrap" data-ring="indigo" data-value="0.62" data-size="46" id="heroRingM"><span class="avatar av-indigo sm">M</span></div>
+              <div class="tile-name">Mira</div>
+              <div class="tile-sub" id="heroSubM">1 offen · 10 min</div>
+            </div>
+            <div class="tile glow-teal-on">
+              <div class="ringwrap" data-ring="teal" data-value="1" data-size="46"><span class="avatar av-teal sm">J</span></div>
+              <div class="tile-name">Jonas</div>
+              <div class="tile-sub">Alles erledigt</div>
+            </div>
+          </div>
+          <div class="card task-mini" id="heroTask">
+            <span class="circle" data-c="indigo"><svg><use href="#check"/></svg></span>
+            <div><div class="row-t">Küche wischen</div><div class="scr-meta">10 min</div></div>
+          </div>
+        </div>
+        <div class="accessory">
+          <span class="acc-ask"><svg><use href="#mark"/></svg>Frag Hestia …</span>
+          <span class="acc-btn"><svg><use href="#mic"/></svg></span>
+          <span class="acc-btn"><svg><use href="#cam"/></svg></span>
+        </div>
+        <div class="tabbar"><span class="on">Heute</span><span>Haushalt</span><span>Essen</span><span>Einkauf</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNKTIONEN -->
+<section class="core" id="funktionen" aria-label="Was Hestia für euch ordnet">
+  <a class="core-tile reveal" href="#haushalt">
+    <div class="ct-vis ct-rings" aria-hidden="true">
+      <span class="cring" style="--c:var(--indigo)"><span class="avatar av-indigo">M</span></span>
+      <span class="cring late" style="--c:var(--teal)"><span class="avatar av-teal">J</span></span>
+    </div>
+    <h3>Haushalt</h3>
+    <p>Hestia schaut jeden Morgen, was fällig ist, und teilt es fair auf. Wer dran ist, müsst ihr nicht mehr ausdiskutieren.</p>
+  </a>
+  <a class="core-tile reveal" href="#essen">
+    <div class="ct-vis ct-food" aria-hidden="true">
+      <div class="ct-paper"><i></i><i></i><i></i><i></i><i></i><span class="ct-scan"></span></div>
+      <div class="ct-plates">
+        <span style="--c:var(--indigo);--z:.72"></span>
+        <span style="--c:var(--teal);--z:1"></span>
+        <span style="--c:var(--pink);--z:.5"></span>
+      </div>
+      <span class="ct-plus">+5 im Vorrat</span>
+    </div>
+    <h3>Essen und Einkauf</h3>
+    <p>Vom Essensplan auf die Einkaufsliste, vom Kassenbon in den Vorrat. Die Portionen rechnet Hestia für jeden aus.</p>
+  </a>
+  <a class="core-tile core-ai reveal" href="#hestia">
+    <div class="ct-vis ct-voice" aria-hidden="true">
+      <span class="ct-bubble">Bad ist geputzt, und die Milch ist leer.</span>
+      <span class="ct-reply"><span class="ic"><svg><use href="#check"/></svg></span>Bad abgehakt</span>
+      <span class="ct-reply r2"><span class="ic"><svg><use href="#check"/></svg></span>Milch auf der Liste</span>
+    </div>
+    <div class="core-ai-text">
+      <span class="eyebrow">Die KI-Hilfe für beides</span>
+      <h3>Frag Hestia</h3>
+      <p>Statt Formulare auszufüllen, sagst du einfach, was passiert ist. Die KI versteht den Satz und trägt alles an der richtigen Stelle ein.</p>
+    </div>
+  </a>
+</section>
+
+<!-- HAUSHALT -->
+<section class="sec chores" id="haushalt">
+  <div class="chores-head reveal">
+    <h2 class="h2">Putzen, ohne darüber<br>reden zu müssen.</h2>
+    <p class="body">Hestia schaut jeden Morgen, was fällig ist, und verteilt es nach Zeit. Wer diese Woche mehr gemacht hat, bekommt weniger. Nach dem Urlaub fängst du einfach normal wieder an. Probier es aus und tipp auf die Kreise.</p>
+  </div>
+
+  <div class="chores-board reveal">
+    <article class="pcard" data-person="indigo" id="pcardM">
+      <div class="pcard-top">
+        <div class="ringwrap" data-ring="indigo" data-value="0" data-size="64" data-stroke="5"><span class="avatar av-indigo">M</span></div>
+        <div>
+          <div class="pcard-name">Mira</div>
+          <div class="pcard-sub" data-sub>3 offen · 40 min</div>
+        </div>
+        <span class="thanks" aria-hidden="true">♥&#xFE0E;</span>
+      </div>
+      <ul class="tasks">
+        <li><button class="circle" data-min="15" aria-label="Küche wischen abhaken"><svg><use href="#check"/></svg></button><div><b>Küche wischen</b><small>15 min</small></div><span class="music">Musik an</span></li>
+        <li><button class="circle" data-min="20" aria-label="Bad putzen abhaken"><svg><use href="#check"/></svg></button><div><b>Bad putzen</b><small>20 min</small></div></li>
+        <li><button class="circle" data-min="5" aria-label="Monstera prüfen abhaken"><svg><use href="#check"/></svg></button><div><b>Monstera prüfen</b><small>Fingertest · 5 min</small></div></li>
+      </ul>
+    </article>
+
+    <article class="pcard" data-person="teal" id="pcardJ">
+      <div class="pcard-top">
+        <div class="ringwrap" data-ring="teal" data-value="0" data-size="64" data-stroke="5"><span class="avatar av-teal">J</span></div>
+        <div>
+          <div class="pcard-name">Jonas</div>
+          <div class="pcard-sub" data-sub>2 offen · 30 min</div>
+        </div>
+        <span class="thanks" aria-hidden="true">♥&#xFE0E;</span>
+      </div>
+      <ul class="tasks">
+        <li><button class="circle" data-min="25" aria-label="Staubsaugen abhaken"><svg><use href="#check"/></svg></button><div><b>Staubsaugen</b><small>25 min</small></div></li>
+        <li><button class="circle" data-min="5" aria-label="Einkaufen abhaken"><svg><use href="#check"/></svg></button><div><b>Einkaufen</b><small>6 Artikel · du bist dran</small></div></li>
+      </ul>
+    </article>
+
+    <div class="chores-side">
+      <div class="side-card">
+        <b class="side-big">♥&#xFE0E; 12</b>
+        <span>Tage Danke-Serie. Ein Tag zählt, wenn jede Person, die etwas erledigt hat, ein Danke bekam.</span>
+      </div>
+      <div class="side-card fresh">
+        <span class="fresh-label"><b>Bad</b><em>Raum-Frische 28 %</em></span>
+        <i class="fresh-bar"><b style="--w:28%"></b></i>
+        <span class="fresh-note">Taucht nur auf, wenn ein Raum unter 35 % fällt.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="chips reveal" aria-label="Weitere Funktionen im Haushalt">
+    <span>Abgeben</span><span>Heute nicht</span><span>Diesmal nicht nötig</span><span>Abwesenheit</span><span>Einmal-Aufgaben</span><span>Pflanzen gießen</span><span>Putzplan mit KI einrichten</span><span>Auswertung</span>
+  </div>
+</section>
+
+<!-- ESSEN UND EINKAUF -->
+<section class="sec food" id="essen">
+  <div class="food-head reveal">
+    <h2 class="h2">Essen und Einkauf,<br>in einem Zug.</h2>
+    <p class="body">Was ihr essen wollt, landet mit einem Tipp auf der Einkaufsliste. Nach dem Einkauf füllt der Kassenbon den Vorrat, und beim Kochen rechnet Hestia aus, wie viel auf welchen Teller kommt.</p>
+  </div>
+
+  <div class="shop" id="einkauf">
+    <div class="shop-list reveal">
+      <div class="progress-card" id="shopProgress">
+        <div class="ringwrap" data-ring="green" data-value="0" data-size="52" data-stroke="5" id="shopRing"><b class="pc-num" id="shopNum">0/6</b></div>
+        <div><b class="pc-title" id="shopTitle">6 Artikel offen</b><span class="pc-sub">Jonas ist dran mit Einkaufen</span></div>
+        <span class="pill pill-small pc-btn">Abschließen</span>
+      </div>
+      <ul class="shopitems" id="shopItems">
+        <li><button aria-label="Milch abhaken"><span class="circle" data-c="green"><svg><use href="#check"/></svg></span><span class="si-name">Milch</span><span class="si-qty">2</span><span class="tag orange">knapp</span></button></li>
+        <li><button aria-label="Haferflocken abhaken"><span class="circle" data-c="green"><svg><use href="#check"/></svg></span><span class="si-name">Haferflocken</span><span class="si-qty">500 g</span></button></li>
+        <li><button aria-label="Tomaten abhaken"><span class="circle" data-c="green"><svg><use href="#check"/></svg></span><span class="si-name">Tomaten</span><span class="si-qty">4</span><span class="tag sub">für Shakshuka</span></button></li>
+        <li><button aria-label="Feta abhaken"><span class="circle" data-c="green"><svg><use href="#check"/></svg></span><span class="si-name">Feta</span><span class="si-qty">1</span></button></li>
+        <li><button aria-label="Spülmittel abhaken"><span class="circle" data-c="green"><svg><use href="#check"/></svg></span><span class="si-name">Spülmittel</span><span class="si-qty">1</span><span class="tag red">leer</span></button></li>
+        <li><button aria-label="Brot abhaken"><span class="circle" data-c="green"><svg><use href="#check"/></svg></span><span class="si-name">Vollkornbrot</span><span class="si-qty">1</span></button></li>
+      </ul>
+    </div>
+
+    <div class="shop-copy reveal">
+      <h3 class="h3">Der Kassenbon füllt den Vorrat.</h3>
+      <p class="body">Nach dem Einkauf fotografierst du den Bon. Hestia liest Artikel, Mengen und Betrag, trägt alles in den Vorrat ein und bucht die Ausgabe auf den, der bezahlt hat. Beim nächsten Bon aus demselben Laden kennt sie die Packungsgrößen schon.</p>
+      <div class="receipt-stage" id="receiptStage">
+        <div class="receipt">
+          <span class="rc-scan"></span>
+          <b class="rc-shop">MARKT</b>
+          <div class="rc-line"><span>H-MILCH 1,5%</span><span>2 x 1,09</span></div>
+          <div class="rc-line"><span>HAFERFL. ZART</span><span>0,89</span></div>
+          <div class="rc-line"><span>FETA 200G</span><span>1,79</span></div>
+          <div class="rc-line"><span>RISPENTOMATEN</span><span>2,29</span></div>
+          <div class="rc-line"><span>SPUELMITTEL</span><span>1,15</span></div>
+          <div class="rc-sum"><span>SUMME</span><span>8,30</span></div>
+        </div>
+        <ul class="pantry" aria-label="Vorrat">
+          <li><span><b>Milch</b><small>2 l von 2 l</small></span><i class="fill"><b style="--w:100%"></b></i><span class="tag green">da</span></li>
+          <li><span><b>Haferflocken</b><small>500 g von 500 g</small></span><i class="fill"><b style="--w:100%"></b></i><span class="tag green">da</span></li>
+          <li><span><b>Feta</b><small>200 g</small></span><i class="fill"><b style="--w:100%"></b></i><span class="tag green">da</span></li>
+          <li><span><b>Tomaten</b><small>4 Stk</small></span><i class="fill"><b style="--w:100%"></b></i><span class="tag green">da</span></li>
+          <li><span><b>Spülmittel</b><small>neu gekauft</small></span><i class="fill"><b style="--w:100%"></b></i><span class="tag green">da</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="h3 bento-title reveal">Ein Topf, für jeden die richtige Portion.</h3>
+
+  <div class="bento">
+    <article class="b b-cook reveal">
+      <div class="b-text">
+        <h3>Kochmodus</h3>
+        <p>Zutaten abhaken, Timer starten, Portionen ablesen. Was im Topf gelandet ist, zieht Hestia vom Vorrat ab.</p>
+      </div>
+      <div class="cook">
+        <div class="cook-title">Linsencurry mit Spinat <span>4 Portionen</span></div>
+        <div class="plates">
+          <div class="plate"><div class="ringwrap" data-ring="indigo" data-value="0.34" data-size="74" data-stroke="5"><span class="avatar av-indigo">M</span></div><b class="num" data-count="380">0</b><small>540 kcal</small></div>
+          <div class="plate"><div class="ringwrap" data-ring="teal" data-value="0.47" data-size="74" data-stroke="5"><span class="avatar av-teal">J</span></div><b class="num" data-count="520">0</b><small>740 kcal</small></div>
+          <div class="plate"><div class="ringwrap" data-ring="pink" data-value="0.19" data-size="74" data-stroke="5"><span class="avatar av-pink">L</span></div><b class="num" data-count="210">0</b><small>300 kcal</small></div>
+        </div>
+        <div class="timer"><span class="timer-ring"></span><span>Linsen köcheln · <b>12:00</b></span></div>
+      </div>
+    </article>
+
+    <article class="b b-scan reveal">
+      <div class="viewfinder">
+        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+        <div class="barcode" aria-hidden="true"></div>
+        <span class="scanline"></span>
+        <div class="scan-result"><b>Skyr natur</b><span>63 kcal · 11 g Eiweiß je 100 g</span></div>
+      </div>
+      <div class="b-text">
+        <h3>Barcode, Etikett oder Teller</h3>
+        <p>Halt die Kamera drauf. Hestia erkennt Packungen, Nährwert-Etiketten und fertige Gerichte.</p>
+      </div>
+    </article>
+
+    <article class="b b-protein reveal">
+      <div class="b-text">
+        <h3>Eiweiß im Blick</h3>
+        <p>Das Ziel ergibt sich aus Gewicht und Alter.</p>
+      </div>
+      <div class="prot-big">
+        <div class="eat-kcal big"><b class="num" data-count="1840">0</b> <span>/ 2.300 kcal</span></div>
+        <div class="protein lg"><span>Eiweiß 84 / 96 g</span><i><b style="--w:87%"></b></i></div>
+        <div class="eat-kcal big over"><b>2.650</b> <span>kcal · <em>+350</em></span></div>
+        <small class="muted">Liegst du über dem Ziel, zeigt ein oranger Bogen, wie viel mehr es war.</small>
+      </div>
+    </article>
+
+    <article class="b b-import reveal">
+      <div class="b-text">
+        <h3>Rezepte aus Link, Text oder Foto</h3>
+        <p>Auch abfotografiert aus dem Kochbuch. Die Nährwerte rechnet Hestia aus den Zutaten.</p>
+      </div>
+      <div class="import">
+        <div class="url-pill"><span class="url-typed" id="urlTyped"></span><span class="caret"></span></div>
+        <div class="recipe-card" id="recipeCard">
+          <div class="rc-img"></div>
+          <div><b>Ofengemüse mit Feta</b><span>35 min · 520 kcal · 24 g Eiweiß</span><span class="ok">Alles im Vorrat</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="b b-plan reveal">
+      <div class="b-text">
+        <h3>Essensplan</h3>
+        <p>7 oder 14 Tage im Voraus. Was fehlt, landet mit einem Tipp auf der Einkaufsliste.</p>
+      </div>
+      <div class="week">
+        <div class="day"><b>Mo</b><span>Linsencurry</span></div>
+        <div class="day"><b>Di</b><span>Reste</span></div>
+        <div class="day today"><b>Mi</b><span>Ofengemüse</span></div>
+        <div class="day"><b>Do</b><span>Pasta Pesto</span></div>
+        <div class="day"><b>Fr</b><span>Pizza</span></div>
+        <div class="day"><b>Sa</b><span>auswärts</span></div>
+        <div class="day"><b>So</b><span>Shakshuka</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- FRAG HESTIA -->
+<section class="sec hestia" id="hestia">
+  <div class="hestia-copy reveal">
+    <span class="eyebrow">KI-Hilfe</span>
+    <h2 class="h2">Du sagst es,<br>Hestia trägt es ein.</h2>
+    <p class="body">Hinter Hestia steckt eine KI, die normale Sätze versteht. Sie sortiert, was du sagst, an die richtige Stelle: Gegessenes zu deinen Kalorien, Fehlendes auf die Einkaufsliste, Geputztes in den Plan. Auf Wunsch schlägt sie auch vor, was ihr heute kocht. Lag sie daneben, nimmst du es mit einem Tipp zurück.</p>
+    <ul class="facts">
+      <li>Die Spracherkennung läuft auf dem iPhone. Deine Stimme geht an keinen Server.</li>
+      <li>Hestia merkt sich das Gespräch. „Nein, zwei davon“ ändert den letzten Eintrag.</li>
+      <li>Über Siri und die Widgets geht das auch, ohne die App zu öffnen.</li>
+    </ul>
+  </div>
+  <div class="hestia-stage reveal">
+    <div class="phone phone-sheet">
+      <div class="island"></div>
+      <div class="screen">
+        <div class="status"><span>18:12</span><span class="status-r"></span></div>
+        <div class="sheet-head"><svg class="sheet-mark"><use href="#mark"/></svg><span>Hestia</span><span class="sheet-done">Fertig</span></div>
+        <div class="chat" id="chat"></div>
+        <div class="composer">
+          <div class="wave" id="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <span class="composer-txt" id="composerTxt">Hör zu …</span>
+          <span class="acc-btn stop"><i></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WIDGETS -->
+<section class="sec widgets" id="widgets">
+  <div class="widgets-head reveal">
+    <h2 class="h2">Eintragen, ohne die App zu öffnen.</h2>
+    <p class="body">Dafür gibt es Widgets für Home- und Sperrbildschirm, Kontrollzentrum, Aktionstaste und Siri. Ein Tipp auf „Cappuccino“, und er ist eingetragen.</p>
+  </div>
+  <div class="wall reveal">
+    <div class="w w-today">
+      <div class="ringwrap" data-ring="indigo" data-value="0.68" data-size="78" data-stroke="7"><span class="avatar av-indigo">M</span></div>
+      <b class="num" data-count="1420">0</b><span>/ 2.100 kcal</span>
+      <small>Eiweiß 58 / 90 g</small>
+    </div>
+    <div class="w w-quick">
+      <div class="wq-head"><b>Schnell erfassen</b><span id="wqKcal">1.420 kcal</span></div>
+      <div class="wq-grid" id="wqGrid">
+        <button data-kcal="110">Cappuccino</button>
+        <button data-kcal="95">Apfel</button>
+        <button data-kcal="190">Müsliriegel</button>
+        <button data-kcal="0">Wasser</button>
+      </div>
+      <div class="wq-toast" id="wqToast"></div>
+    </div>
+    <div class="w w-lock">
+      <div class="lock-time">9:41</div>
+      <div class="lock-row">
+        <span class="gauge" style="--p:68"><b>68</b></span>
+        <span class="lockbtn"><svg><use href="#mic"/></svg></span>
+        <span class="lockbtn"><svg><use href="#cam"/></svg></span>
+      </div>
+    </div>
+    <div class="w w-siri">
+      <div class="siri-q">„In Hestia eintragen: eine Banane“</div>
+      <div class="siri-a">Eingetragen: Banane, 105 kcal. Heute bist du bei 1.525 kcal.</div>
+      <span class="siri-orb" aria-hidden="true"></span>
+    </div>
+    <div class="w w-next">
+      <small>Nächste Mahlzeit · Abendessen</small>
+      <b>Ofengemüse mit Feta</b>
+      <span>Mira 520 kcal · Jonas 690 kcal</span>
+      <span class="w-cam"><svg><use href="#cam"/></svg>Foto vom Essen</span>
+    </div>
+  </div>
+</section>
+
+<!-- ZU ZWEIT -->
+<section class="sec together" id="zusammen">
+  <div class="house-stage reveal">
+    <div class="house" id="house"><svg><use href="#mark"/></svg></div>
+    <div class="swatches" role="group" aria-label="Personenfarben ausprobieren">
+      <button style="--c:#5856D6" aria-label="Indigo" class="on"></button>
+      <button style="--c:#30B0C7" aria-label="Petrol" class="on"></button>
+      <button style="--c:#FF2D55" aria-label="Pink"></button>
+      <button style="--c:#00C7BE" aria-label="Mint"></button>
+      <button style="--c:#AF52DE" aria-label="Lila"></button>
+    </div>
+    <small class="muted center">Tipp auf die Farben. Das Haushalts-Zeichen mischt die Farben aller Personen.</small>
+  </div>
+  <div class="together-copy reveal">
+    <h2 class="h2">Gemacht für zwei,<br>und für alle, die dazugehören.</h2>
+    <dl class="pairs">
+      <div><dt>Live synchron</dt><dd>Was du abhakst, ist auf dem anderen iPhone sofort abgehakt.</dd></div>
+      <div><dt>Dein Handy zeigt dich</dt><dd>Die andere Person siehst du nur beim Danke und wenn ihr beide fertig seid.</dd></div>
+      <div><dt>Kinder ohne Konto</dt><dd>Sie bekommen ein Profil ohne Login, mit eigenem Bedarf und eigener Portion.</dd></div>
+      <div><dt>Ausgaben geteilt</dt><dd>Hestia hält fest, wer bezahlt hat, und zeigt, wer wem etwas schuldet.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- PRIVAT -->
+<section class="sec privacy" id="privat">
+  <h2 class="h2 reveal">Was bei euch passiert, bleibt bei euch.</h2>
+  <div class="priv-grid">
+    <div class="pv pv-wide reveal"><b>Server in Frankfurt</b><span>Die Daten liegen auf Servern in Frankfurt. Sehen kann sie nur euer Haushalt.</span></div>
+    <div class="pv reveal"><b>Stimme bleibt auf dem iPhone</b><span>Was du sagst, wird direkt auf dem Gerät in Text umgewandelt.</span></div>
+    <div class="pv reveal"><b>KI ohne Training</b><span>Die KI bekommt nur, was sie für die eine Anfrage braucht. Kalorien und Körperdaten gehören nicht dazu, und trainiert wird damit nichts.</span></div>
+    <div class="pv pv-dark reveal"><b>Keine Werbung</b><span>Hestia zeigt keine Anzeigen und verkauft keine Daten.</span><a class="textlink" href="datenschutz.html">Datenschutzerklärung lesen</a></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="final" id="zugang">
+  <div class="final-glow" aria-hidden="true"></div>
+  <img class="final-icon reveal" src="img/icon-512.png" width="112" height="112" alt="Hestia App-Icon">
+  <h2 class="display-2 reveal">Bald im App Store.</h2>
+  <p class="body center reveal">Gerade testen wir Hestia auf iPhone und iPad. Wenn ihr mitmachen wollt, schreibt uns.</p>
+  <a class="pill reveal" href="mailto:support.hestiahome@gmail.com?subject=Hestia%20testen">Zugang anfragen</a>
+</section>
+
+</main>
+
+<footer class="foot">
+  <span class="foot-brand"><svg><use href="#mark"/></svg>Hestia</span>
+  <nav aria-label="Rechtliches">
     <a href="datenschutz.html">Datenschutz</a>
     <a href="impressum.html">Impressum</a>
-  </footer>
-</main>
+    <a href="mailto:support.hestiahome@gmail.com">Kontakt</a>
+  </nav>
+</footer>
+
+<script src="home.js?v=3" defer></script>
 </body>
 </html>
