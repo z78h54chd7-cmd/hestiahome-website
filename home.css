@@ -647,6 +647,24 @@ main { overflow-x: clip; }
 .final > *:not(.final-glow) { position: relative; }
 .final-icon { width: 112px; height: 112px; border-radius: 26px; box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.45); }
 .final .body { margin-bottom: 32px; }
+/* Warteliste */
+.final [hidden] { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.wait { display: flex; gap: 10px; width: min(520px, 100%); flex-wrap: wrap; justify-content: center; }
+.wait-input { flex: 1 1 240px; min-width: 0; height: 52px; padding: 0 22px; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--text); font: inherit; font-size: 17px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+.wait-input:focus { border-color: var(--text); box-shadow: 0 0 0 4px var(--flame); }
+.wait-input[aria-invalid="true"] { border-color: var(--red); }
+.wait .pill { border: 0; cursor: pointer; font-family: inherit; }
+.wait .pill[disabled] { opacity: 0.55; cursor: default; }
+.wait-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.wait-error { flex-basis: 100%; margin: 4px 0 0; color: var(--red); font-size: 15px; }
+.wait-note { margin: 18px 0 0; max-width: 46ch; color: var(--faint); font-size: 14px; line-height: 1.5; }
+.wait-note a { color: var(--sub); }
+.wait-done { display: grid; justify-items: center; gap: 6px; max-width: 40ch; animation: pop 0.4s var(--ease) both; }
+.wait-done b { font-family: var(--serif); font-weight: 600; font-size: 28px; letter-spacing: -0.01em; margin-top: 6px; }
+.wait-done span:last-child { color: var(--sub); }
+.wait-check { width: 52px; height: 52px; border-radius: 50%; background: var(--green); color: #fff; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 0 0 8px var(--green-soft); }
+.wait-check svg { width: 28px; height: 28px; }
 
 .foot { max-width: 1240px; margin: 0 auto; padding: 32px 20px 48px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; border-top: 1px solid var(--line); color: var(--sub); font-size: 15px; }
 .foot-brand { display: flex; align-items: center; gap: 8px; font-family: var(--serif); font-weight: 600; font-size: 19px; color: var(--text); }

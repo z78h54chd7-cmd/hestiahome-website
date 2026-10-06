@@ -14,7 +14,7 @@
   <link rel="icon" href="img/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="preload" href="fonts/Newsreader-SemiBold.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="home.css?v=3">
+  <link rel="stylesheet" href="home.css?v=4">
 </head>
 <body>
 
@@ -40,7 +40,7 @@
     <a href="#hestia">Frag Hestia</a>
     <a href="#privat">Privatsphäre</a>
   </nav>
-  <a class="pill pill-small" href="#zugang">Zugang anfragen</a>
+  <a class="pill pill-small" href="#warteliste">Auf die Warteliste</a>
 </header>
 
 <main id="top">
@@ -55,7 +55,7 @@
     </h1>
     <p class="lead load" style="--d:.35s">Hestia teilt die Aufgaben auf, plant das Essen und führt die Einkaufsliste. Du sagst nur, was erledigt ist, und Hestia trägt es ein.</p>
     <div class="cta-row load" style="--d:.5s">
-      <a class="pill" href="#zugang">Zugang anfragen</a>
+      <a class="pill" href="#warteliste">Auf die Warteliste</a>
       <a class="textlink" href="#funktionen">Alle Funktionen</a>
     </div>
   </div>
@@ -444,12 +444,24 @@
 </section>
 
 <!-- CTA -->
-<section class="final" id="zugang">
+<section class="final" id="warteliste">
   <div class="final-glow" aria-hidden="true"></div>
   <img class="final-icon reveal" src="img/icon-512.png" width="112" height="112" alt="Hestia App-Icon">
   <h2 class="display-2 reveal">Bald im App Store.</h2>
-  <p class="body center reveal">Gerade testen wir Hestia auf iPhone und iPad. Wenn ihr mitmachen wollt, schreibt uns.</p>
-  <a class="pill reveal" href="mailto:support.hestiahome@gmail.com?subject=Hestia%20testen">Zugang anfragen</a>
+  <p class="body center reveal">Trag dich ein, und du erfährst als Erstes, wenn Hestia startet. Alle auf der Warteliste bekommen den <strong>ersten Monat gratis</strong>.</p>
+  <form class="wait reveal" id="waitForm" novalidate>
+    <label class="sr-only" for="waitEmail">E-Mail-Adresse</label>
+    <input class="wait-input" id="waitEmail" name="EMAIL" type="email" inputmode="email" autocomplete="email" placeholder="deine@email.de" required>
+    <input class="wait-hp" name="email_address_check" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="pill" type="submit">Auf die Warteliste</button>
+    <p class="wait-error" id="waitError" role="alert" hidden></p>
+  </form>
+  <div class="wait-done" id="waitDone" role="status" hidden>
+    <span class="wait-check"><svg><use href="#check"/></svg></span>
+    <b>Fast geschafft.</b>
+    <span>Bitte bestätige die E-Mail, die wir dir gerade geschickt haben. Erst dann stehst du auf der Liste.</span>
+  </div>
+  <p class="wait-note reveal">Wir schreiben dir nur zum Start von Hestia. Abmelden geht jederzeit mit einem Klick. Mehr dazu in der <a href="datenschutz.html#warteliste">Datenschutzerklärung</a>.</p>
 </section>
 
 </main>
@@ -463,6 +475,7 @@
   </nav>
 </footer>
 
-<script src="home.js?v=3" defer></script>
+<script src="home.js?v=5" defer></script>
+<script src="waitlist.js?v=2" defer></script>
 </body>
 </html>

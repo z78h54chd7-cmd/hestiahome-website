@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Hestia · Warteliste</title>
+  <meta name="description" content="Trag dich auf die Warteliste für Hestia ein – die Haushalts-App, die mitdenkt. Erster Monat gratis.">
+  <meta name="theme-color" content="#F4F3EF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0E0F10" media="(prefers-color-scheme: dark)">
+  <meta property="og:title" content="Hestia · Warteliste">
+  <meta property="og:description" content="Damit nicht alles in einem Kopf liegt. Erster Monat gratis für alle auf der Warteliste.">
+  <meta property="og:image" content="https://hestiahome.app/img/icon-512.png">
+  <meta property="og:url" content="https://hestiahome.app/warteliste/">
+  <link rel="icon" href="../img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="preload" href="../fonts/Newsreader-SemiBold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="../home.css?v=5">
+  <style>
+    html, body { min-height: 100%; }
+    body { display: flex; flex-direction: column; min-height: 100svh; }
+    .wl { position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 48px 20px 28px; overflow: hidden; }
+    .wl > *:not(.final-glow) { position: relative; }
+    .wl .final-glow { top: 42%; }
+    .wl-icon { width: 88px; height: 88px; border-radius: 20px; box-shadow: 0 24px 50px -18px rgba(0, 0, 0, 0.45); }
+    .wl h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(34px, 9vw, 56px); line-height: 1.05; letter-spacing: -0.03em; margin: 22px 0 12px; max-width: 13ch; }
+    .wl .lead { color: var(--sub); font-size: 17px; line-height: 1.45; max-width: 34ch; margin: 0 0 26px; }
+    .wl .lead strong { color: var(--text); }
+    .wl .wait { width: min(440px, 100%); }
+    .wl .wait .pill { flex: 1 1 100%; height: 54px; font-size: 17px; }
+    .wl .wait-input { flex-basis: 100%; height: 54px; text-align: center; }
+    .follow { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 18px; }
+    .follow a { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--text); font-weight: 600; font-size: 15px; text-decoration: none; }
+    .follow-hint { margin-top: 18px; color: var(--sub); font-size: 15px; }
+    .wl-foot { display: flex; justify-content: center; gap: 22px; padding: 0 20px calc(22px + env(safe-area-inset-bottom)); font-size: 14px; color: var(--faint); }
+    .wl-foot a { color: var(--sub); text-decoration: none; }
+    .wl-more { margin-top: 26px; }
+  </style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mark" viewBox="0 0 64 64">
+    <path d="M15 52 V29 A17 17 0 0 1 49 29 V52" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M11 52 H53" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M32 47.5 C26.8 47.5 24 44.2 24 40.3 C24 35.6 28.4 33.2 29.6 27.5 C33.4 30 35.4 33.4 34.8 36.6 C36.4 35.8 37.4 34.3 37.6 32.6 C39.6 34.8 40.4 37.4 40.4 40 C40.4 44.2 37.2 47.5 32 47.5 Z" fill="currentColor"/>
+  </symbol>
+  <symbol id="check" viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<main class="wl final" id="warteliste">
+  <div class="final-glow" aria-hidden="true"></div>
+  <img class="wl-icon" src="../img/icon-512.png" width="88" height="88" alt="Hestia App-Icon">
+  <h1>Sei dabei, wenn Hestia startet.</h1>
+  <p class="lead">Haushalt, Essen und Einkauf für euch beide – Hestia denkt mit. Alle auf der Warteliste bekommen den <strong>ersten Monat gratis</strong>.</p>
+
+  <form class="wait" id="waitForm" novalidate>
+    <label class="sr-only" for="waitEmail">E-Mail-Adresse</label>
+    <input class="wait-input" id="waitEmail" name="EMAIL" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="deine@email.de" required>
+    <input class="wait-hp" name="email_address_check" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="pill" type="submit">Auf die Warteliste</button>
+    <p class="wait-error" id="waitError" role="alert" hidden></p>
+  </form>
+
+  <div class="wait-done" id="waitDone" role="status" hidden>
+    <span class="wait-check"><svg><use href="#check"/></svg></span>
+    <b>Fast geschafft.</b>
+    <span>Bitte bestätige die E-Mail, die wir dir gerade geschickt haben. Erst dann stehst du auf der Liste.</span>
+  </div>
+  <div id="follow" hidden>
+    <p class="follow-hint">Folg uns, damit du nichts verpasst:</p>
+    <div class="follow">
+      <a id="followIg" href="#" target="_blank" rel="noopener" hidden>Instagram</a>
+      <a id="followTt" href="#" target="_blank" rel="noopener" hidden>TikTok</a>
+    </div>
+  </div>
+
+  <p class="wait-note">Wir schreiben dir nur zum Start von Hestia. Abmelden geht jederzeit mit einem Klick. <a href="../datenschutz.html#warteliste">Datenschutz</a></p>
+  <a class="textlink wl-more" href="../">Was kann Hestia?</a>
+</main>
+
+<footer class="wl-foot">
+  <a href="../impressum.html">Impressum</a>
+  <a href="../datenschutz.html">Datenschutz</a>
+</footer>
+
+<script>
+  // Profile für „Folg uns“ (leer = Knopf ausgeblendet). Erst eintragen, wenn die Konten angelegt sind.
+  const INSTAGRAM = '';   // z. B. 'https://www.instagram.com/hestiahome/'
+  const TIKTOK = '';      // z. B. 'https://www.tiktok.com/@hestiahome'
+  [['followIg', INSTAGRAM], ['followTt', TIKTOK]].forEach(([id, url]) => { if (url) { const a = document.getElementById(id); a.href = url; a.hidden = false; } });
+  // „Folg uns“ erscheint nach dem Eintragen bzw. nach der Bestätigung, sofern ein Profil hinterlegt ist.
+  new MutationObserver(() => {
+    if (!document.getElementById('waitDone').hidden && (INSTAGRAM || TIKTOK)) document.getElementById('follow').hidden = false;
+  }).observe(document.getElementById('waitDone'), { attributes: true, attributeFilter: ['hidden'] });
+</script>
+<script src="../waitlist.js?v=2" defer></script>
+</body>
+</html>
